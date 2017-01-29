@@ -34,4 +34,35 @@ void ATankPlayerController::AimTwordsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
+	FVector HitLocation; // Out Parameter
+
+	//UE_LOG(LogTemp, Warning, TEXT("HitLocation %s"), *HitLocation.ToString());
+
+	if (GetSightRayHitLocation(HitLocation))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
+		// TODO Tell controlled tank to aim at this point
+	}
+
+	
+}
+
+bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
+{
+	HitLocation = FVector(0.1);
+	FHitResult Hit;
+	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
+	FVector RayEnd;
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+
+
+	GetControlledTank()->GetController()->GetPlayerViewPoint(PlayerViewPointLocation, PlayerViewPointRotation);
+
+	GetControlledTank()->ActorLineTraceSingle(Hit, PlayerViewPointLocation, RayEnd, ECollisionChannel::ECC_PhysicsBody, TraceParameters);
+	
+	HitLocation = PlayerViewPointLocation;
+	
+
+	return false;
 }

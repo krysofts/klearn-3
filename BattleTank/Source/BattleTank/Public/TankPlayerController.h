@@ -22,4 +22,6 @@ public:
 	virtual void BeginPlay() override;
 
 	void AimTwordsCrosshair();
+
+	bool GetSightRayHitLocation(FVector&) const;
 };
