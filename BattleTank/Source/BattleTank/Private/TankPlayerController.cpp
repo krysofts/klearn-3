@@ -3,6 +3,12 @@
 #include "BattleTank.h"
 #include "TankPlayerController.h"
 
+void ATankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimTwordsCrosshair();
+	//UE_LOG(LogTemp, Warning, TEXT("PlayerController Ticking"));
+}
 
 void ATankPlayerController::BeginPlay()
 {
@@ -22,4 +28,10 @@ void ATankPlayerController::BeginPlay()
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
+}
+
+void ATankPlayerController::AimTwordsCrosshair()
+{
+	if (!GetControlledTank()) { return; }
+
 }
