@@ -4,6 +4,17 @@
 #include "TankAIController.h"
 
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	//AimTwordsCrosshair();
+	//UE_LOG(LogTemp, Warning, TEXT("PlayerController Ticking"));
+	if (GetPlayerTank())
+	{
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
+
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -35,4 +46,5 @@ ATank* ATankAIController::GetPlayerTank() const
 	}
 	return Cast<ATank>(PlayerTank);
 }
+
 
