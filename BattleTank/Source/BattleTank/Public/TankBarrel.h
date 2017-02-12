@@ -8,7 +8,9 @@
 /**
  * 
  */
-UCLASS()
+
+ // Barrel Component
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
@@ -16,5 +18,13 @@ class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 public:
 	void Elevate(float DegreesPerSecond);
 	
-	
+private:
+	UPROPERTY(EditAnywhere)
+		float MaxDegreesPerSecond = 20; 
+
+	UPROPERTY(EditAnywhere)
+		float MaxElevationDegrees = 40;
+
+	UPROPERTY(EditAnywhere)
+		float MinElevationDegrees = -5;
 };
